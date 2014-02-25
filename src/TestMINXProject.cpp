@@ -1,11 +1,13 @@
 
 #include "TestMINXProject.h"
 
-#include "Media/SoundFile.h"
+#include <Media/SoundFile.h>
+#include <Input/GamePad.h>
 
 using namespace MINX_TESTMINXPROJECT;
 
 Media::SoundFile* clip;
+Input::GamePad* gamePad;
 
 TestMINXProject::TestMINXProject() : Game::Game()
 {
@@ -26,6 +28,7 @@ void TestMINXProject::LoadContent()
 	//Put stuff here that loads content for your game.
 	clip = new Media::SoundFile("this_is_the_end_x.wav", this);
 	clip->Play();
+	gamePad = new Input::GamePad(0,this);
 	Game::LoadContent();
 }
 
@@ -43,7 +46,7 @@ void TestMINXProject::Update(GameTime * gameTime)
 
 void TestMINXProject::Draw(GameTime * gameTime)
 {
-	glClearColor( 100/255.0f, 149/255.0f, 237/255.0f, 1.0f );
+	glClearColor( (gamePad->GetAxis(1).val+1)/2, gamePad->GetButton(3).state, (gamePad->GetAxis(3).val+1)/2, 1.0f );
     	glClear( GL_COLOR_BUFFER_BIT );
 
 	//Put stuff here to draw your game each frame.
