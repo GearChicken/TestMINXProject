@@ -14,3 +14,11 @@
 
 # bin folder
 bin/
+
+# debug folder
+Debug/plugins
+
+# windows binaries
+*.ilk
+*.pdb
+*.exe
