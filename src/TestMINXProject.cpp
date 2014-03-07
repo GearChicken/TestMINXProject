@@ -3,6 +3,7 @@
 
 #include <MINX/Media/SoundFile.h>
 #include <MINX/Input/GamePad.h>
+#include <MINX/Graphics/Color.h>
 
 using namespace MINX_TESTMINXPROJECT;
 
@@ -50,8 +51,7 @@ void TestMINXProject::Update(GameTime * gameTime)
 
 void TestMINXProject::Draw(GameTime * gameTime)
 {
-	glClearColor( (gamePad->GetAxis(1).val+1)/2, gamePad->GetButton(3).state, (gamePad->GetAxis(3).val+1)/2, 1.0f );
-	glClear( GL_COLOR_BUFFER_BIT );
+	gameWindow->ClearColor(Graphics::Color(100, 149, 237));
 
 	//Put stuff here to draw your game each frame.
 	Game::Draw(gameTime);
