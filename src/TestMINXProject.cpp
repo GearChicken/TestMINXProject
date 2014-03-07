@@ -14,7 +14,7 @@ TestMINXProject::TestMINXProject()
 	//This is the constructor. Put stuff here that should happen when the Game is created.
 
 	isRunning = true;
-	Game::SetVideoOptions(640, 480, 32, 0, "TestMINXProject");
+	Game::SetVideoOptions(640, 480, "TestMINXProject");
 }
 
 void TestMINXProject::Initialize()
