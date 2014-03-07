@@ -51,7 +51,8 @@ void TestMINXProject::Update(GameTime * gameTime)
 
 void TestMINXProject::Draw(GameTime * gameTime)
 {
-	gameWindow->ClearColor(Graphics::Color(100, 149, 237));
+	Graphics::Color backgroundColor = Graphics::Color((gamePad->GetAxis(1).val+1)*128-1, gamePad->GetButton(3).state*255, (gamePad->GetAxis(3).val+1)*128+1);
+	gameWindow->ClearColor(backgroundColor);
 
 	//Put stuff here to draw your game each frame.
 	Game::Draw(gameTime);
