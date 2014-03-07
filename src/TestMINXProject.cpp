@@ -1,8 +1,8 @@
 
 #include "TestMINXProject.h"
 
-#include <Media/SoundFile.h>
-#include <Input/GamePad.h>
+#include <MINX/Media/SoundFile.h>
+#include <MINX/Input/GamePad.h>
 
 using namespace MINX_TESTMINXPROJECT;
 
