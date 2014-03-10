@@ -27,7 +27,10 @@ void TestMINXProject::Initialize()
 void TestMINXProject::LoadContent()
 {
 	//Put stuff here that loads content for your game.
-	clip = new Media::SoundFile("this_is_the_end_x.wav", this);
+	
+	//Sound Stolen Shamelessly from:
+	//http://www.pdsounds.org/sounds/dial_up_connection
+	clip = new Media::SoundFile("../content/dial-up_connection.mp3", this);
 	gamePad = new Input::GamePad(0,this);
 	Game::LoadContent();
 }
