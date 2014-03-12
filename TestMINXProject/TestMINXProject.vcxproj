@@ -57,6 +57,9 @@
     <PostBuildEvent>
       <Command>xcopy "C:\Program Files (x86)\VideoLAN\VLC\plugins\*" "$(SolutionDir)\Debug\plugins\" /s /e /d</Command>
     </PostBuildEvent>
+    <PreLinkEvent>
+      <Command>xcopy "C:\Program Files (x86)\VideoLAN\VLC\libvlc*.dll" "$(SolutionDir)\Debug\" /s /e /d</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -75,11 +78,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\TestMINXProject.cpp" />
-    <ClCompile Include="..\src\Program.cpp" />
+    <ClCompile Include="..\src\*.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\TestMINXProject.h" />
+    <ClInclude Include="..\src\*.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
