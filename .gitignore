@@ -16,9 +16,6 @@
 # bin folder
 bin/
 
-# debug folder
-Debug/plugins
-
 # windows binaries
 *.ilk
 *.pdb
@@ -27,3 +24,14 @@ Debug/plugins
 #logs
 *.tlog
 *.log
+
+Debug/
+Release/
+MINX/Debug/
+MINX/Release/
+TestMINXProject/Debug/
+TestMINXProject/Release/
+packages/
+*.sdf
+*.suo
+*.opensdf
