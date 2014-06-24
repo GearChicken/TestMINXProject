@@ -30,7 +30,7 @@ void TestMINXProject::LoadContent()
 	
 	//Sound Stolen Shamelessly from:
 	//http://www.pdsounds.org/sounds/dial_up_connection
-	clip = new Media::SoundFile("../content/dial-up_connection.mp3", this);
+	clip = new Media::SoundFile("../content/beer_splash.wav", this);
 	gamePad = new Input::GamePad(0,this);
 	Game::LoadContent();
 }
