@@ -6,9 +6,9 @@ A Test Project for MINX Features
 ### Running TestMINXProject
 
 #### On Windows
-Visual Studio will build TestMINXProject to the Debug or Release folders. To run TestMINXProject simply go into the respective folder and execute (double-click) on TestMINXProject.exe
-###### *Please Note*
-Visual Studio generates two versions of the Debug and Release folders, two inside the root directory (the directory that has the src folder inside it) and two inside the TestMINXProject folder which is a Visual Studio generated folder.
+When you first clone this repository you must open up the MINX solution file in the minx/ directory. 
+You will need to build the solution once from that point in order to download the NuGet packages properly
+for MINX to build.  After you have done this you will be able to use the TestMINXProject solution.
 
 #### On GNU/Linux
-The makefile will automatically generate the binary for TestMINXProject in the bin folder. To run TestMINXProject simply execture it!
+The makefile will automatically generate the binary for TestMINXProject in the bin folder. To run TestMINXProject simply execute it!

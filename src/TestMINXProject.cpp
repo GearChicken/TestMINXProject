@@ -4,11 +4,14 @@
 #include <MINX/Media/SoundFile.h>
 #include <MINX/Input/GamePad.h>
 #include <MINX/Graphics/Color.h>
+#include <MINX/Graphics/ShaderFactory.h>
+#include <MINX/Input/Keyboard.h>
 
 using namespace MINX_TESTMINXPROJECT;
-
+using namespace MINX::Graphics;
 Media::SoundFile* clip;
 Input::GamePad* gamePad;
+Input::Keyboard* keyboard;
 bool hasPlayed = false;
 TestMINXProject::TestMINXProject()
 {
@@ -27,11 +30,12 @@ void TestMINXProject::Initialize()
 void TestMINXProject::LoadContent()
 {
 	//Put stuff here that loads content for your game.
-	
+	ShaderFactory::GetInstance();
 	//Sound Stolen Shamelessly from:
 	//http://www.pdsounds.org/sounds/dial_up_connection
-	clip = new Media::SoundFile("../content/beer_splash.wav", this);
+	clip = new Media::SoundFile("../content/beer_splash.wav");
 	gamePad = new Input::GamePad(0,this);
+	keyboard = new Input::Keyboard(this);
 	Game::LoadContent();
 }
 
@@ -47,6 +51,11 @@ void TestMINXProject::Update(GameTime * gameTime)
 	{
 		clip->Play();
 		hasPlayed=true;
+	}
+
+	if(keyboard->GetKey(Input::Keys::KEY_SPACE).state)
+	{
+		isRunning=false;
 	}
 	//Put stuff here to update the logic in your game each tick.
 	Game::Update(gameTime);
