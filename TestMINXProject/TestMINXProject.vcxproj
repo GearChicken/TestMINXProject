@@ -65,6 +65,9 @@
       <Command>
       </Command>
     </PreLinkEvent>
+    <PreBuildEvent>
+      <Command>Robocopy $(SolutionDir)minx\src $(SolutionDir)minx\include\MINX *.h /E</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
