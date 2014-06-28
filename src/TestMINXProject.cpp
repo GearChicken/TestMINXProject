@@ -7,8 +7,9 @@
 #include <MINX/Graphics/Font.h>
 #include <MINX/Graphics/ShaderFactory.h>
 #include <MINX/Graphics/TextureBatch.h>
+#include <MINX/Graphics/RenderTarget.h>
 #include <MINX/Input/Keyboard.h>
-
+#include <MINX/MathHelper.h>
 using namespace MINX_TESTMINXPROJECT;
 using namespace MINX::Graphics;
 Font* myFont;
@@ -17,6 +18,7 @@ Input::GamePad* gamePad;
 Input::Keyboard* keyboard;
 bool hasPlayed = false;
 TextureBatch* texBatch;
+RenderTarget* renTar;
 TestMINXProject::TestMINXProject()
 {
 	//This is the constructor. Put stuff here that should happen when the Game is created.
@@ -44,6 +46,10 @@ void TestMINXProject::LoadContent()
 	myFont = new Font(freeTypeLibrary, "Ubuntu-B.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
 	gamePad = new Input::GamePad(0,this);
 	keyboard = new Input::Keyboard(this);
+
+
+	Vector2 size = myFont->TextSize("llllabcdefghiklmnopqrstuvwxyz", 16);
+	renTar = new RenderTarget((int)size.X, (int)size.Y);
 	Game::LoadContent();
 }
 
@@ -72,10 +78,17 @@ void TestMINXProject::Update(GameTime * gameTime)
 void TestMINXProject::Draw(GameTime * gameTime)
 {
 	gameWindow->ClearColor(Color(0,0,0));
+	
+	SetRenderTarget(renTar, Color(0,0,0,0));
+	myFont->RenderText("llllabcdefghiklmnopqrstuvwxyz", 0, 0, 16, Color(255,0,0));
+	SetRenderTarget(NULL, Color(0,0,0));
 
-	Texture2D* myFontTex = myFont->RenderText("labcdefghiklmnopqrstuvwxyz1234567890", 0, 0, 16, Color(255,255,255,255));
+	myFont->RenderText("12345678902", 0, 100, 16, Color(255,255,255));
+	
+	texBatch->Draw(renTar->GetTexture(), 100, 200, Math::PI / 6);
 
-	texBatch->Draw(myFontTex, 10, 10, 1, 1);
+	//texBatch->Draw(myFontTex, 10, 10, 1, 1);
+	//texBatch->Draw(myFontTex2, 10, 100, 1, 1);
 	texBatch->DrawLoadedTextures();
 
 	//Put stuff here to draw your game each frame.
