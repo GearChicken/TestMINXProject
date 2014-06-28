@@ -43,7 +43,7 @@ void TestMINXProject::LoadContent()
 	//Sound Stolen Shamelessly from:
 	//http://www.pdsounds.org/sounds/dial_up_connection
 	clip = new Media::SoundFile("../content/beer_splash.wav");
-	myFont = new Font(freeTypeLibrary, "Ubuntu-B.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
+	myFont = new Font(this, "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
 	gamePad = new Input::GamePad(0,this);
 	keyboard = new Input::Keyboard(this);
 
