@@ -43,7 +43,7 @@ void TestMINXProject::LoadContent()
 	//Sound Stolen Shamelessly from:
 	//http://www.pdsounds.org/sounds/dial_up_connection
 	clip = new Media::SoundFile("../content/beer_splash.wav");
-	myFont = new Font(this, "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
+	myFont = new Font(freeTypeLibrary, "Ubuntu-B.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
 	gamePad = new Input::GamePad(0,this);
 	keyboard = new Input::Keyboard(this);
 
@@ -66,7 +66,6 @@ void TestMINXProject::Update(GameTime * gameTime)
 		clip->Play();
 		hasPlayed=true;
 	}
-
 	if(keyboard->GetKey(Input::Keys::KEY_SPACE).state)
 	{
 		isRunning=false;
@@ -76,20 +75,22 @@ void TestMINXProject::Update(GameTime * gameTime)
 }
 
 void TestMINXProject::Draw(GameTime * gameTime)
-{
-	gameWindow->ClearColor(Color(0,0,0));
-	
-	SetRenderTarget(renTar, Color(0,0,0,0));
+{	
+	SetRenderTarget(renTar, Color(0,255,0,128));
 	myFont->RenderText("llllabcdefghiklmnopqrstuvwxyz", 0, 0, 16, Color(255,0,0));
-	SetRenderTarget(NULL, Color(0,0,0));
-
+	SetRenderTarget(NULL, Color(0,0,0,255));
 	myFont->RenderText("12345678902", 0, 100, 16, Color(255,255,255));
 	
-	texBatch->Draw(renTar->GetTexture(), 100, 200, Math::PI / 6);
+	texBatch->Draw(renTar->GetTexture(), 100, 200, Math::degreesToRadians(gameTime->GetElapsedMillis()/100.0f));
 
 	//texBatch->Draw(myFontTex, 10, 10, 1, 1);
 	//texBatch->Draw(myFontTex2, 10, 100, 1, 1);
 	texBatch->DrawLoadedTextures();
+
+	if(keyboard->GetKey(Input::Keys::KEY_ENTER).state && !keyboard->GetKey(Input::Keys::KEY_ENTER).prevState)
+	{
+		renTar->GetTexture()->SavetoPNG("test.png");
+	}
 
 	//Put stuff here to draw your game each frame.
 	Game::Draw(gameTime);
