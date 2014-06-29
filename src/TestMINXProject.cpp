@@ -17,6 +17,7 @@ Media::SoundFile* clip;
 Input::GamePad* gamePad;
 Input::Keyboard* keyboard;
 bool hasPlayed = false;
+bool saveFile = false;
 TextureBatch* texBatch;
 RenderTarget* renTar;
 TestMINXProject::TestMINXProject()
@@ -70,6 +71,10 @@ void TestMINXProject::Update(GameTime * gameTime)
 	{
 		isRunning=false;
 	}
+	if((keyboard->GetKey(Input::Keys::KEY_ENTER).GetState()) && !(keyboard->GetKey(Input::Keys::KEY_ENTER).GetPrevState()))
+	{
+		saveFile = true;
+	}
 	//Put stuff here to update the logic in your game each tick.
 	Game::Update(gameTime);
 }
@@ -86,10 +91,11 @@ void TestMINXProject::Draw(GameTime * gameTime)
 	//texBatch->Draw(myFontTex, 10, 10, 1, 1);
 	//texBatch->Draw(myFontTex2, 10, 100, 1, 1);
 	texBatch->DrawLoadedTextures();
-
-	if(keyboard->GetKey(Input::Keys::KEY_ENTER).GetState() && !keyboard->GetKey(Input::Keys::KEY_ENTER).GetPrevState())
+	if(saveFile)
 	{
+		cout << "saving texture" << endl;
 		renTar->GetTexture()->SavetoPNG("test.png");
+		saveFile=false;
 	}
 
 	//Put stuff here to draw your game each frame.
