@@ -17,6 +17,7 @@ Media::SoundFile* clip;
 Input::GamePad* gamePad;
 Input::Keyboard* keyboard;
 bool hasPlayed = false;
+bool saveFile = false;
 TextureBatch* texBatch;
 RenderTarget* renTar;
 Texture2D* faceTex;
@@ -72,6 +73,10 @@ void TestMINXProject::Update(GameTime * gameTime)
 	if(keyboard->GetKey(Input::Keys::KEY_SPACE).GetState())
 	{
 		isRunning=false;
+	}
+	if((keyboard->GetKey(Input::Keys::KEY_ENTER).GetState()) && !(keyboard->GetKey(Input::Keys::KEY_ENTER).GetPrevState()))
+	{
+		saveFile = true;
 	}
 	//Put stuff here to update the logic in your game each tick.
 	Game::Update(gameTime);
