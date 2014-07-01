@@ -19,6 +19,8 @@ Input::Keyboard* keyboard;
 bool hasPlayed = false;
 TextureBatch* texBatch;
 RenderTarget* renTar;
+Texture2D* faceTex;
+Texture2D* catTex;
 TestMINXProject::TestMINXProject()
 {
 	//This is the constructor. Put stuff here that should happen when the Game is created.
@@ -31,8 +33,8 @@ void TestMINXProject::Initialize()
 {
 	//Put stuff here that should happen when the Game is initialized.
 
-
 	Game::Initialize();
+
 	texBatch = new TextureBatch(ShaderFactory::GetInstance()->GetShaderAtIndex(0));
 }
 
@@ -43,10 +45,11 @@ void TestMINXProject::LoadContent()
 	//Sound Stolen Shamelessly from:
 	//http://www.pdsounds.org/sounds/dial_up_connection
 	clip = new Media::SoundFile("../content/beer_splash.wav");
-	myFont = new Font(freeTypeLibrary, "Ubuntu-B.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
+	myFont = new Font(this, "Ubuntu-B.ttf", ShaderFactory::GetInstance()->GetShaderAtIndex(1));
 	gamePad = new Input::GamePad(0,this);
 	keyboard = new Input::Keyboard(this);
-
+	faceTex = new Texture2D("headshot1.jpg");
+	catTex = new Texture2D("Penguins.jpg");
 
 	Vector2 size = myFont->TextSize("llllabcdefghiklmnopqrstuvwxyz", 16);
 	renTar = new RenderTarget((int)size.X, (int)size.Y);
@@ -66,7 +69,7 @@ void TestMINXProject::Update(GameTime * gameTime)
 		clip->Play();
 		hasPlayed=true;
 	}
-	if(keyboard->GetKey(Input::Keys::KEY_SPACE).state)
+	if(keyboard->GetKey(Input::Keys::KEY_SPACE).GetState())
 	{
 		isRunning=false;
 	}
@@ -76,21 +79,26 @@ void TestMINXProject::Update(GameTime * gameTime)
 
 void TestMINXProject::Draw(GameTime * gameTime)
 {	
-	SetRenderTarget(renTar, Color(0,255,0,128));
-	myFont->RenderText("llllabcdefghiklmnopqrstuvwxyz", 0, 0, 16, Color(255,0,0));
 	SetRenderTarget(NULL, Color(0,0,0,255));
-	myFont->RenderText("12345678902", 0, 100, 16, Color(255,255,255));
-	
-	texBatch->Draw(renTar->GetTexture(), 100, 200, Math::degreesToRadians(gameTime->GetElapsedMillis()/100.0f));
 
+	//myFont->RenderText("12345678902", 0, 100, 16, Color(255,255,255));
+
+
+	for (int i = 0; i < 20; i++)
+	{
+		if(rand()%100 > 50)
+		{
+			texBatch->Draw(catTex, rand() % GameWindow::GetWidth(), rand() % GameWindow::GetHeight(), Math::degreesToRadians(rand() % 360));
+		}
+		else
+		{
+			texBatch->Draw(faceTex, rand() % GameWindow::GetWidth(), rand() % GameWindow::GetHeight(), Math::degreesToRadians(rand() % 360));
+		}
+	}
+	//texBatch->Draw(faceTex, 20, 200);
 	//texBatch->Draw(myFontTex, 10, 10, 1, 1);
 	//texBatch->Draw(myFontTex2, 10, 100, 1, 1);
 	texBatch->DrawLoadedTextures();
-
-	if(keyboard->GetKey(Input::Keys::KEY_ENTER).state && !keyboard->GetKey(Input::Keys::KEY_ENTER).prevState)
-	{
-		renTar->GetTexture()->SavetoPNG("test.png");
-	}
 
 	//Put stuff here to draw your game each frame.
 	Game::Draw(gameTime);
